@@ -1,0 +1,38 @@
+.title {
+  font-size: 34px;
+  margin-bottom: 10px;
+  color: seagreen;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.box {
+  display: flex;
+  /* flex-direction: column; */
+
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  width: 100px;
+  padding: 6px 0;
+  margin-right: 8px;
+  border-radius: 5px;
+
+  font-size: 16px;
+
+  color: black;
+  background-color: gainsboro;
+}
+
+.button:hover, .button:focus{
+background-color: rgb(49, 144, 246);
+}
+
+.btn_good {
+  background-color: yellowgreen;
+}
+
+.btn_bad {
+  background-color: tomato;
+}

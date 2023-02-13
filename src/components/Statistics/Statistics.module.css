@@ -1,0 +1,27 @@
+.comp_title {
+  margin-bottom: 10px;
+}
+
+.list {
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  background-color: rgba(117, 168, 245, 0.609);
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.item {
+  margin-right: auto;
+  text-align: left;
+  margin-bottom: 5px;
+  padding: 4px;
+}
+
+.item:last-child {
+  margin-bottom: 0;
+}
