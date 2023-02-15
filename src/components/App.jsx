@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 
 import s from '../components/FeedbackOptions/FeedbackOptions.module.css';
@@ -8,76 +8,68 @@ import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
 import Notification from './Notification';
 import Statistics from './Statistics';
 
-export class App extends Component {
-  state = {
-    good: 0,
-    neutral: 0,
-    bad: 0,
+export const App = () => {
+  const [good, setGood] = useState(5);
+  const [neutral, setNeutral] = useState(3);
+  const [bad, setBad] = useState(2);
+
+  const onLeaveFeedback = evt => {
+    const key = evt.target.name;
+
+    switch (key) {
+      case 'good':
+        return setGood(prevState => prevState + 1);
+      case 'neutral':
+        return setNeutral(prevState => prevState + 1);
+      case 'bad':
+        return setBad(prevState => prevState + 1);
+      default:
+        throw new Error(`Unsupported type of ${key}`);
+    }
   };
 
-  onLeaveFeedback(evt) {
-    let key = evt.target.name;
-    this.setState(prevState => {
-      return {
-        [key]: prevState[key] + 1,
-      };
-    });
-  }
-
-  countTotalFeedback() {
-    const { good, neutral, bad } = this.state;
+  const countTotalFeedback = () => {
     return good + neutral + bad;
-  }
+  };
 
-  countPositiveFeedbackPercentage() {
-    const { good, neutral, bad } = this.state;
+  const countPositiveFeedbackPercentage = () => {
     const total = good + neutral + bad;
     return total > 0 ? Math.round((100 / total) * good) : 0;
+  };
 
-    // const positiveFeedback = this.state.good * this.countTotalFeedback();   // також працює 💚
-    // return positiveFeedback.toFixed(2)*100;  // також працює 💚
-  }
+  return (
+    <div
+      className="container"
+      style={{
+        display: 'block',
+        textAlign: 'center',
+        marginTop: '40px',
+        marginBottom: '20px',
+        color: '#010101',
+      }}
+    >
+      <h2 className={classNames(s.title)}>Please leave feedback 👇</h2>
 
-  render() {
-    const keys = Object.keys(this.state);
-    const { good, bad, neutral } = this.state;
+      <Section title="">
+        <FeedbackOptions
+          options={['good', 'neutral', 'bad']}
+          onLeaveFeedback={onLeaveFeedback}
+        ></FeedbackOptions>
+      </Section>
 
-    return (
-      <div
-        className="container"
-        style={{
-          display: 'block',
-          textAlign: 'center',
-          marginTop: '40px',
-          marginBottom: '20px',
-          color: '#010101',
-        }}
-      >
-        {/* <h3>React 🛠 homework template 🙀</h3> */}
-        <h2 className={classNames(s.title)}>Please leave feedback 👇</h2>
-
-        <Section title="">
-          <FeedbackOptions
-            options={keys}
-            onLeaveFeedback={this.onLeaveFeedback.bind(this)}
-          ></FeedbackOptions>
-        </Section>
-
-        <Section title="Statistics"> 
-        {
-          this.countTotalFeedback() === 0 ? 
-          <Notification message="There is no feedback"></Notification> : 
+      <Section title="Statistics">
+        {countTotalFeedback() === 0 ? (
+          <Notification message="There is no feedback"></Notification>
+        ) : (
           <Statistics
-          good={good}
-          neutral={neutral}
-          bad={bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-        ></Statistics>
-        }
-
-        </Section>
-      </div>
-    );
-  }
-}
+            good={good}
+            neutral={neutral}
+            bad={bad}
+            total={countTotalFeedback()}
+            positivePercentage={countPositiveFeedbackPercentage()}
+          ></Statistics>
+        )}
+      </Section>
+    </div>
+  );
+};
