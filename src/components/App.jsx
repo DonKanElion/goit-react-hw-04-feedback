@@ -9,9 +9,9 @@ import Notification from './Notification';
 import Statistics from './Statistics';
 
 export const App = () => {
-  const [good, setGood] = useState(5);
-  const [neutral, setNeutral] = useState(3);
-  const [bad, setBad] = useState(2);
+  const [good, setGood] = useState(0);
+  const [neutral, setNeutral] = useState(0);
+  const [bad, setBad] = useState(0);
 
   const onLeaveFeedback = evt => {
     const key = evt.target.name;
