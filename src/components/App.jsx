@@ -13,12 +13,7 @@ export const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  // const options = [good, neutral, bad];
-
-  // console.log(Object.values(options))
-  // console.log(Object.key(options))
-
-
+  const keyState = ['good', 'neutral','bad'];
 
   const onLeaveFeedback = evt => {
     const key = evt.target.name;
@@ -59,10 +54,7 @@ export const App = () => {
 
       <Section title="">
         <FeedbackOptions
-          options={['good', 'neutral', 'bad']}
-
-          // options={options}
-
+          options={keyState}
           onLeaveFeedback={onLeaveFeedback}
         ></FeedbackOptions>
       </Section>

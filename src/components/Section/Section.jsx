@@ -20,4 +20,3 @@ Section.propTypes = {
 };
 
 export default Section;
- 
